@@ -8,24 +8,6 @@ provider "aws" {
   }
 }
 
-/*
-data "aws_ami" "ubuntu" {
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["099720109477"] # Canonical
-}
-*/
-
 resource "aws_vpc" "vpc" {
   cidr_block           = var.cidr_vpc
   enable_dns_support   = true
@@ -82,7 +64,7 @@ resource "aws_instance" "web" {
   // vpc_security_group_ids      = [aws_security_group.sg_8080.id]
   vpc_security_group_ids      = [aws_security_group.sg_22.id, aws_security_group.sg_8080.id]
   associate_public_ip_address = true
-  user_data                   = templatefile("bootstrap.sh",  { department = var.user_department, name = var.user_name })
+  user_data                   = templatefile("user_data.tftpl",  { department = var.user_department, name = var.user_name })
   key_name                    = aws_key_pair.ssh_key.key_name
 }
 
