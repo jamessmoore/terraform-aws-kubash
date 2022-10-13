@@ -21,9 +21,8 @@ variable "aws_region" {
 variable "aws_amis" {
   type = map
   default = {
-    "us-east-1" = "ami-0739f8cdb239fe9ae"
-    "us-west-2" = "ami-008b09448b998a562"
-    "us-east-2" = "ami-0ebc8f6f580a04647"
+    "us-east-1" = "ami-04fc00d791d804b24"
+    "us-west-1" = "ami-0d32650d85b475623"
   }
 }
 
