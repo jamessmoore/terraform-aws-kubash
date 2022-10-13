@@ -69,7 +69,7 @@ resource "aws_instance" "web" {
 }
 
 resource "aws_ebs_volume" "ebs" {
-  availability_zone = "us-west-2a"
+  availability_zone = "us-east-1a"
   size              = 40
 
   tags = {
