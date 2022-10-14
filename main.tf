@@ -21,6 +21,7 @@ resource "aws_internet_gateway" "igw" {
 resource "aws_subnet" "subnet_public" {
   vpc_id     = aws_vpc.vpc.id
   cidr_block = var.cidr_subnet
+  availability_zone = var.aws_availability_zone
 }
 
 resource "aws_route_table" "rtb_public" {
@@ -60,6 +61,7 @@ resource "aws_instance" "web" {
   // ami                         = data.aws_ami.ubuntu.id
   ami                         = lookup(var.aws_amis, var.aws_region)
   instance_type               = "t2.large"
+  availability_zone           = var.aws_availability_zone
   subnet_id                   = aws_subnet.subnet_public.id
   // vpc_security_group_ids      = [aws_security_group.sg_8080.id]
   vpc_security_group_ids      = [aws_security_group.sg_22.id, aws_security_group.sg_8080.id]
@@ -75,7 +77,7 @@ resource "aws_volume_attachment" "ebs_att" {
 }
 
 resource "aws_ebs_volume" "ebs" {
-  availability_zone = "us-east-1a"
+  availability_zone = var.aws_availability_zone
   size              = 40
 
   tags = {
