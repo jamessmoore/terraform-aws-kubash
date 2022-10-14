@@ -68,6 +68,12 @@ resource "aws_instance" "web" {
   key_name                    = aws_key_pair.ssh_key.key_name
 }
 
+resource "aws_volume_attachment" "ebs_att" {
+  device_name = "/dev/xvdh"
+  volume_id   = aws_ebs_volume.ebs.id
+  instance_id = aws_instance.web.id
+}
+
 resource "aws_ebs_volume" "ebs" {
   availability_zone = "us-east-1a"
   size              = 40
