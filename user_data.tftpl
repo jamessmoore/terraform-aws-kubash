@@ -18,5 +18,9 @@ ln -s /mnt/disk1/libvirt/images /var/lib/libvirt/images
 
 # Install Kubash
 # curl -L git.io/kubash|bash
+git remote add gitlab https://gitlab.com/kubash/kubash.git
+git fetch --all
+git checkout fulltest
+git pull
 
 EOF
